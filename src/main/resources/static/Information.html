@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+
+<h3> Annotations </h3>
+<p> @Data --> gives us Both Getters and Setters
+<p> @Getter --> Gives us Getters
+<P> @Setter --> Gives Us only Setters
+<p> Applying Unique Constraints <p>
+<pre>
+	<p> @Table(
+				name = "posts",
+				uniqueConstraints = {@UniqueConstraint(columnNames = {"title"})}
+				)
+	</p>
+</pre>
+
+<h3>Pagination feature is not available in CRUD Repository so JPA Repository is needed
+in JPA findAll method return type is List
+In CRUD findAll merhod return type is Iteration</h3>
+<br>
+
+<p> API Data from the URL will gets Transferred to the DTO class or Payload and then this data will be passed to the Controller</p>
+<p>Dont Give Direct Data to the Entity it will make our application Less Secure </p>
+<p>We are Working with APIs so we will only use RestController</p>
+
+
+<h3>Exception Package </h3>
+<p>Exception Class should be a child class of Runtime Exception</p>
+
+
+
+<h3>Parameters Can Be in Two formats</h3>
+<p>	QueryParameter --> localhost:8080/?id=1
+	@RequestParam is used to access this variable value
+<hr>
+<p>	PathVariable --> localhost:8080/api/posts/1
+	@Pathvariable annotation is used to Access this parameter 1
+</body>
+</html>
