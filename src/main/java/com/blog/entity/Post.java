@@ -1,11 +1,16 @@
 package com.blog.entity;
 
+import java.util.HashSet;
+import java.util.Set;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Lob;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import lombok.AllArgsConstructor;
@@ -39,7 +44,18 @@ public class Post {
 	@Lob
 	@Column(name="content", nullable=false)
 	private String content;
-
+	
+	
+	/*
+	@OneToMany(mappedBy = "post", cascade = CascadeType.ALL, orphanRemoval = true)
+	Set<Comment> comment = new HashSet<>();
+	*/
+	//how will this know which variable is the mapped one 
+	//this variable is mapped-by post variable which is present in other class
+	//cascade changes in one table will affect changes in other table
+	@OneToMany(mappedBy = "post", cascade = CascadeType.ALL, orphanRemoval = true)
+	Set<Comment> comments = new HashSet<>();
+	
 	public Long getId() {
 		return id;
 	}

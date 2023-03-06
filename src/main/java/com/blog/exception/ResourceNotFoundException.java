@@ -3,6 +3,7 @@ package com.blog.exception;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
+//Custom Exception Class
 @ResponseStatus(value=HttpStatus.NOT_FOUND)
 public class ResourceNotFoundException extends RuntimeException{
 
@@ -15,7 +16,7 @@ public class ResourceNotFoundException extends RuntimeException{
 	
 	//step3 create a default Constructor
 	public ResourceNotFoundException(String resourceName, String fieldName, Long fieldValue) {
-		//this super keyword is automatically called customized messege in super give any parameter
+		//this super keyword is automatically called customized message in super give any parameter
 		super(String.format("%s not found with %s:'%s",resourceName,fieldName,fieldValue));
 		this.resourceName = resourceName;
 		this.fieldName = fieldName;
@@ -39,5 +40,7 @@ public class ResourceNotFoundException extends RuntimeException{
 	//COnstructor of this class will be called automatically 
 	//return the constructor
 	
-	
+	//---------------------------------------------------------------------------------
+	//Exception handling in Global Manner
+	//---------------------------------------------------------------------------------
 }
