@@ -21,7 +21,6 @@ import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import com.blog.security.CustomUserDetailsService;
 
 //@configuration will help us to define the configuration files 
-@SuppressWarnings("deprecation")
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)  //admin to access certain methods 
@@ -59,7 +58,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 		.passwordEncoder(passwordEncoder());
 	}
 	
-	//bean is not automatically created
+	//bean is not automatically created for injecting object address to variable
 	@Override
 	@Bean
 	protected AuthenticationManager authenticationManager() throws Exception{

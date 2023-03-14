@@ -25,10 +25,10 @@ import io.jsonwebtoken.UnsupportedJwtException;
 @Service
 public class JwtTokenProvider {
 
-	@Value("${app.jwt-secret}")
+	@Value("${security.jwt.token.secret-key:ankitkosankar}")
     private String jwtSecret;
 	
-    @Value("${app.jwt-expiration-milliseconds}")
+    @Value("${security.jwt.token.expire-length:3600000}")
     private int jwtExpirationInMs;
     
     @Autowired
@@ -80,5 +80,4 @@ public class JwtTokenProvider {
             throw new BlogAPIException(HttpStatus.BAD_REQUEST, "JWT claims string is empty.");
         }
     }
-
 }
