@@ -1,7 +1,8 @@
 package com.blog.config;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.neo4j.Neo4jProperties.Authentication;
+
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -11,12 +12,9 @@ import org.springframework.security.config.annotation.method.configuration.Enabl
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.provisioning.InMemoryUserDetailsManager;
+
 
 import com.blog.security.CustomUserDetailsService;
 
@@ -32,6 +30,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	@Autowired
 	private CustomUserDetailsService userDetailsService; //loadByUsername
 	
+	
 	@Bean
 	PasswordEncoder passwordEncoder() {
 		return new BCryptPasswordEncoder();
@@ -44,12 +43,15 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 		http
 			.csrf().disable()
 			.authorizeRequests()
+			.antMatchers(HttpMethod.OPTIONS,"/**").permitAll()
 			.antMatchers(HttpMethod.GET, "api/**").permitAll()
+			.antMatchers(HttpMethod.POST, "api/**").permitAll()
 			.antMatchers("/api/auth/**").permitAll()
 			.anyRequest()
 			.authenticated()
 			.and()
 			.httpBasic();
+		http.cors();
 	}
 	
 	@Override
@@ -78,4 +80,18 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 		//User Name and Password Can be stored like this too 
 				//with the help of UserDetails Service and InMemoryDB --one way
 	}*/
+	
+	/*
+	 * @Bean public CorsConfigurationSource corsConfigurationSource() {
+	 * CorsConfiguration configuration = new CorsConfiguration();
+	 * configuration.setAllowedOrigins(Arrays.asList("*"));
+	 * configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "PATCH",
+	 * "DELETE", "OPTIONS"));
+	 * configuration.setAllowedHeaders(Arrays.asList("authorization",
+	 * "content-type", "x-auth-token"));
+	 * configuration.setExposedHeaders(Arrays.asList("x-auth-token"));
+	 * UrlBasedCorsConfigurationSource source = new
+	 * UrlBasedCorsConfigurationSource(); source.registerCorsConfiguration("/**",
+	 * configuration); return source; }
+	 */
 }
